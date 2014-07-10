@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cd /home/ubuntu/src/ona
+source /home/ubuntu/src/.virtualenvs/ona/bin/activate
+python manage.py syncdb --noinput
+#source /home/ubuntu/src/.virtualenvs/ona/bin/activate &&
+python manage.py migrate --noinput
+# source /home/ubuntu/src/.virtualenvs/ona/bin/activate &&
+python manage.py collectstatic --noinput
+
+supervisord -n

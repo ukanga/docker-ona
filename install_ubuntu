@@ -9,7 +9,7 @@ export KEYRING=/etc/apt/trusted.gpg.d/apt.postgresql.org.gpg
 test -e $KEYRING || sudo touch $KEYRING
 sudo apt-key --keyring $KEYRING add /apt.postgresql.org.gpg
 sudo apt-get update
-DEBIAN_FRONTEND=noninteractive apt-get install -yqq python python-dev python-setuptools python-pip python-virtualenv git-core libpq-dev libproj-dev gdal-bin memcached libmemcached-dev supervisor mongodb libxslt1-dev libjpeg-dev libfreetype6-dev zlib1g-dev default-jre nginx rabbitmq-server apt-get install -y postgresql-9.3-postgis-2.1 postgresql-9.3-postgis-script postgis
+DEBIAN_FRONTEND=noninteractive sudo apt-get install python python-dev python-setuptools python-pip python-virtualenv git-core libpq-dev libproj-dev gdal-bin memcached libmemcached-dev supervisor mongodb libxslt1-dev libjpeg-dev libfreetype6-dev zlib1g-dev default-jre nginx rabbitmq-server postgresql-9.3-postgis-2.1 postgresql-9.3-postgis-script postgis
 
 mkdir -p /home/ubuntu/src/.virtualenvs
 virtualenv /home/ubuntu/src/.virtualenvs/ona
@@ -21,14 +21,14 @@ sudo ln -s /usr/lib/x86_64-linux-gnu/libjpeg.so /usr/lib/
 
 git clone https://github.com/onaio/onadata.git /home/ubuntu/src/ona
 . /home/ubuntu/src/.virtualenvs/ona/bin/activate && pip install -r /home/ubuntu/src/ona/requirements/common.pip --allow-all-external
-. home/ubuntu/src/.virtualenvs/ona/bin/activate && pip install uwsgi
+. /home/ubuntu/src/.virtualenvs/ona/bin/activate && pip install uwsgi
 
 cp -rf context/* /tmp
 
 sudo cp /tmp/etc/nginx/sites-available/nginx.conf /etc/nginx/sites-enabled/ona.conf
 sudo rm -f /etc/nginx/sites-enabled/default
 sudo cp /tmp/etc/supervisor/conf.d/ona.conf /etc/supervisor/conf.d/
-sudo mkdir -p /data/postgresql/9.3/main && mkdir -p /data/db
+sudo mkdir -p /data/postgresql/9.3/main && sudo mkdir -p /data/db
 sudo mkdir -p /var/log/uwsgi
 sudo mkdir -p /var/log/ona
 sudo mkdir -p /var/log/celery

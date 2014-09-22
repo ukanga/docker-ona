@@ -1,7 +1,7 @@
 #!/bin/bash
 supervisord
 sleep 4
-sudo -u postgres createuser onadata
+sudo -u postgres createuser -P onadata
 sudo -u postgres createdb onadata -O onadata
 sudo -u postgres psql -c "CREATE EXTENSION IF NOT EXISTS postgis;" -d onadata -U postgres
 sudo -u postgres psql -c "CREATE EXTENSION IF NOT EXISTS postgis_topology;" -d onadata -U postgres

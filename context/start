@@ -1,0 +1,18 @@
+#!/bin/bash
+supervisord
+sleep 4
+sudo -u postgres createuser onadata
+sudo -u postgres createdb onadata -O onadata
+sudo -u postgres psql -c "CREATE EXTENSION IF NOT EXISTS postgis;" -d onadata -U postgres
+sudo -u postgres psql -c "CREATE EXTENSION IF NOT EXISTS postgis_topology;" -d onadata -U postgres
+
+cd /home/ubuntu/src/ona
+source /home/ubuntu/src/.virtualenvs/ona/bin/activate
+python manage.py syncdb --noinput
+#source /home/ubuntu/src/.virtualenvs/ona/bin/activate &&
+python manage.py migrate --noinput
+# source /home/ubuntu/src/.virtualenvs/ona/bin/activate &&
+python manage.py collectstatic --noinput
+/usr/bin/supervisorctl shutdown
+
+supervisord -n

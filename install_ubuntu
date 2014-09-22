@@ -4,11 +4,11 @@
 export CODENAME=trusty
 sudo sh -c 'echo "deb http://archive.ubuntu.com/ubuntu $CODENAME main universe" > /etc/apt/sources.list.d/universe.list'
 sudo sh -c 'echo "deb http://apt.postgresql.org/pub/repos/apt/ $CODENAME-pgdg main" > /etc/apt/sources.list.d/pgdg.list'
-cp apt.postgresql.org.gpg /apt.postgresql.org.gpg
+sudo cp apt.postgresql.org.gpg /apt.postgresql.org.gpg
 export KEYRING=/etc/apt/trusted.gpg.d/apt.postgresql.org.gpg
-test -e $KEYRING || touch $KEYRING
-apt-key --keyring $KEYRING add /apt.postgresql.org.gpg
-apt-get update
+test -e $KEYRING || sudo touch $KEYRING
+sudo apt-key --keyring $KEYRING add /apt.postgresql.org.gpg
+sudo apt-get update
 DEBIAN_FRONTEND=noninteractive apt-get install -yqq python python-dev python-setuptools python-pip python-virtualenv git-core libpq-dev libproj-dev gdal-bin memcached libmemcached-dev supervisor mongodb libxslt1-dev libjpeg-dev libfreetype6-dev zlib1g-dev default-jre nginx rabbitmq-server apt-get install -y postgresql-9.3-postgis-2.1 postgresql-9.3-postgis-script postgis
 
 mkdir -p /home/ubuntu/src/.virtualenvs

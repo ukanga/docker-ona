@@ -9,7 +9,7 @@ export KEYRING=/etc/apt/trusted.gpg.d/apt.postgresql.org.gpg
 test -e $KEYRING || sudo touch $KEYRING
 sudo apt-key --keyring $KEYRING add /apt.postgresql.org.gpg
 sudo apt-get update
-DEBIAN_FRONTEND=noninteractive sudo apt-get install python python-dev python-setuptools python-pip python-virtualenv git-core libpq-dev libproj-dev gdal-bin memcached libmemcached-dev supervisor mongodb libxslt1-dev libjpeg-dev libfreetype6-dev zlib1g-dev default-jre nginx rabbitmq-server postgresql-9.3-postgis-2.1 postgresql-9.3-postgis-script postgis
+DEBIAN_FRONTEND=noninteractive sudo apt-get install -y python python-dev python-setuptools python-pip python-virtualenv git-core libpq-dev libproj-dev gdal-bin memcached libmemcached-dev supervisor mongodb libxslt1-dev libjpeg-dev libfreetype6-dev zlib1g-dev default-jre nginx rabbitmq-server postgresql-9.3-postgis-2.1 postgresql-9.3-postgis-script postgis
 
 mkdir -p /home/ubuntu/src/.virtualenvs
 virtualenv /home/ubuntu/src/.virtualenvs/ona
